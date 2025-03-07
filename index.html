@@ -2,237 +2,495 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prasan Poudel Portfolio.</title>
-    <link rel="stylesheet" href="./style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Prasan Poudel | Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="./Images/icon.png" />
+    <!-- Font Awesome for icons -->
     <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="icon" href="./images/icon.png" />
   </head>
-  <body>
+  <body class="light-mode">
+    <!-- Preloader -->
     <div class="preLoaderContainer">
-      <div class="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <div class="loader"></div>
     </div>
+    <!-- Navigation -->
     <header>
-      <h1 class="primaryColor">Portfolio</h1>
-      <div class="navLinks">
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About Me</a></li>
-          <li><a href="#projects">Projects</a></li>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="#hero">Portfolio</a>
+        </div>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#hero" class="nav-link">Home</a></li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link">About Me</a>
+          </li>
+          <li class="nav-item">
+            <a href="#skills" class="nav-link">My Skills</a>
+          </li>
+          <li class="nav-item">
+            <a href="#projects" class="nav-link">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contact Me</a>
+          </li>
         </ul>
-      </div>
-      <button
-        id="darkModeBtn"
-        class="bx bx-moon"
-        onclick="darkModeToggle()"
-      ></button>
-      <div id="menuBtn" class="bx bx-menu-alt-right"></div>
+        <div class="theme-toggle">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+        </div>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
     </header>
-    <section class="hero" id="hero">
-      <div class="heroText" data-aos="fade-up">
-        <p class="greet"><img src="./images/hello.png" alt="" />, I'm</p>
-        <h1 class="primaryColor highlightedText">
-          Prasan
-          <span class="transparentText highlightedText"> Poudel</span>
-        </h1>
-        <p class="typewriter"></p>
-        <div class="mySocials">
-          <ul>
-            <li>
-              <a href="https://facebook.com/prasan.poudel.77" target="_blank"
-                ><i class="bx bxl-facebook-circle"></i
-              ></a>
-              <a href="#"><i class="bx bxl-linkedin-square"></i></a>
-              <a href="mailto:prasanpoudel501.gmail.com" target="_blank"
-                ><i class="bx bxl-gmail"></i
-              ></a>
-              <a href="https://github.com/PrasanPoudel" target="_blank"
-                ><i class="bx bxl-github"></i
-              ></a>
-            </li>
-          </ul>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>
+            Hi, I'm <br />
+            <span class="highlight">Prasan Poudel</span>
+          </h1>
+          <h2 class="typewriter"></h2>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn primary-btn">View My Work</a>
+            <a href="#contact" class="btn secondary-btn">Get In Touch</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img
+            src="./Images/Portrait.png"
+            alt="Developer Portrait"
+            class="profile-img"
+          />
         </div>
       </div>
-      <div class="heroImg"></div>
+      <div class="scroll-down">
+        <a href="#about"><i class="fas fa-chevron-down"></i></a>
+      </div>
     </section>
 
-    <section class="about" id="about">
-      <div class="about-Box1">
-        <img src="./images/icon.png" alt="" />
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="section-header">
+        <h2>About Me</h2>
+        <div class="underline"></div>
       </div>
-      <div class="about-Box2" data-aos="fade-up">
-        <p class="headingText highlightedText">About me</p>
-        <p class="explanation">
-          I'm a highly skilled web developer and also a computer science student
-          with a passion for creating amazing and engaging web applications. I
-          am currently studying bachelor in computer science and information
-          technology from Tribhuvan University of Nepal. I am highly skilled in
-          working with MERN(MongoDB, Express Js, React Js, Node Js) stack
-          applications and also version control tools like git & github.
-        </p>
-        <p class="explanation">
-          I am always looking for new challenges and opportunities to expand my
-          skill set. I am passionate about creating innovative and effective web
-          solutions that make a fulfillment in my client's demand.
-        </p>
-      </div>
-    </section>
-    <section class="mySkills">
-      <div class="mySkillsTitle">
-        <p class="highlightedText">My skills:</p>
-      </div>
-      <div class="skills" data-aos="fade-up">
-        <ul>
-          <li><i class="bx bxl-html5"></i>HTML</li>
-          <li><i class="bx bxl-css3"></i>CSS</li>
-          <li><i class="bx bxl-sass"></i>SASS</li>
-          <li><i class="bx bxl-tailwind-css"></i>Tailwind</li>
-          <li><i class="bx bxl-javascript"></i>JavaScript</li>
-          <li><i class="bx bxl-react"></i>React Js</li>
-          <li><i class="bx bxl-nodejs"></i>Node Js</li>
-          <li><i class="bx bxl-mongodb"></i>MongoDB</li>
-          <li><i class="bx bxl-git"></i>Git</li>
-        </ul>
-      </div>
-    </section>
-    <section class="projects" id="projects">
-      <div class="projectsTitle">
-        <p class="highlightedText">Projects:</p>
-      </div>
-      <div class="headingText">
-        My <span class="primaryColor highlightedText">latest</span>
-        <br />awesome
-        <span class="transparentText highlightedText">projects</span>
-      </div>
-      <div class="allProjects" data-aos="fade-up">
-        <div class="project">
-          <div class="projectName">MERN stack Job Portal</div>
-          <div class="projectLink">
-            <a href="https://kaamsetu.vercel.app" target="_blank"
-              >Demo
-              <i class="bx bxs-right-arrow"></i>
-            </a>
-          </div>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="./Images/Portrait.png" alt="Developer Working" />
         </div>
-        <div class="project">
-          <div class="projectName">Foodee- Food delivery</div>
-          <div class="projectLink">
-            <a href="https://foodee-prasanpoudel.vercel.app" target="_blank"
-              >Demo
-              <i class="bx bxs-right-arrow"></i>
-            </a>
-          </div>
-        </div>
-        <div class="project">
-          <div class="projectName">Client's Portfolio</div>
-          <div class="projectLink">
-            <a
-              href="https://prasanpoudel.github.io/Client_Portfolio-Madhav/"
-              target="_blank"
-              >Demo
-              <i class="bx bxs-right-arrow"></i>
-            </a>
-          </div>
-        </div>
-        <div class="project">
-          <div class="projectName">Budget Application</div>
-          <div class="projectLink">
-            <a
-              href="https://prasanpoudel.github.io/Javascript_Projects/Budget%20App/"
-              target="_blank"
-              >Demo
-              <i class="bx bxs-right-arrow"></i>
-            </a>
-          </div>
+        <div class="about-text">
+          <p>
+            I'm a highly skilled web developer and also a computer science
+            student with a passion for creating amazing and engaging web
+            applications. I am currently studying bachelor in computer science
+            and information technology from Tribhuvan University of Nepal. I am
+            highly skilled in working with MERN(MongoDB, Express Js, React Js,
+            Node Js) stack applications and also version control tools like git
+            & github.
+          </p>
+          <p>
+            I am always looking for new challenges and opportunities to expand
+            my skill set. I am passionate about creating innovative and
+            effective web solutions that make a fulfillment in my client's
+            demand.
+          </p>
+          <p>
+            When I'm not coding, you'll find me exploring new technologies,
+            contributing to open-source projects, or enjoying outdoor
+            adventures. I believe that the best digital solutions come from
+            understanding both technical requirements and human needs.
+          </p>
         </div>
       </div>
     </section>
 
-    <section class="testimonials" data-aos="fade-up">
-      <p class="testimonialsTitle highlightedText">Testimonials:</p>
-      <div class="headingText">
-        What <span class="primaryColor highlightedText">my clients</span> have
-        <br />
-        to say <span class="transparentText highlightedText">about me</span>
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+      <div class="section-header">
+        <h2>My Skills</h2>
+        <div class="underline"></div>
       </div>
-      <div class="clientTestimonials">
-        <div class="clientTestimonial">
-          <div class="clientImg">
-            <img src="./images/client1.png" alt="" />
-          </div>
-          <div class="clientTestimonialComment">
-            <div class="quote">
-              <i class="bx bxs-quote-alt-left"></i>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3>Frontend Development</h3>
+          <div class="skills-grid">
+            <div class="skill-card" data-skill="HTML5">
+              <i class="fab fa-html5"></i>
+              <h4>HTML5</h4>
             </div>
-            <div class="comment">
-              "Outstanding work! My experience with this web developer was
-              fantastic. He delivered a visually appealing and user-friendly
-              website that exceeded my expectations. Highly recommended."
+            <div class="skill-card" data-skill="CSS3">
+              <i class="fab fa-css3-alt"></i>
+              <h4>CSS3</h4>
             </div>
-            <div class="client">
-              <p class="clientName">Madhav Acharya</p>
-              <p class="clientPost">UI/UX Designer, Yoddhalab</p>
+            <div class="skill-card" data-skill="Tailwind">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M18.5 9.51a4.22 4.22 0 0 1-1.91-1.34A5.77 5.77 0 0 0 12 6a4.72 4.72 0 0 0-5 4 3.23 3.23 0 0 1 3.5-1.49 4.32 4.32 0 0 1 1.91 1.35A5.77 5.77 0 0 0 17 12a4.72 4.72 0 0 0 5-4 3.2 3.2 0 0 1-3.5 1.51zm-13 4.98a4.22 4.22 0 0 1 1.91 1.34A5.77 5.77 0 0 0 12 18a4.72 4.72 0 0 0 5-4 3.23 3.23 0 0 1-3.5 1.49 4.32 4.32 0 0 1-1.91-1.35A5.8 5.8 0 0 0 7 12a4.72 4.72 0 0 0-5 4 3.2 3.2 0 0 1 3.5-1.51z"
+                ></path>
+              </svg>
+              <h4>Tailwind CSS</h4>
+            </div>
+            <div class="skill-card" data-skill="JavaScript">
+              <i class="fab fa-js"></i>
+              <h4>JavaScript</h4>
+            </div>
+            <div class="skill-card" data-skill="React">
+              <i class="fab fa-react"></i>
+              <h4>ReactJS</h4>
+            </div>
+            <div class="skill-card" data-skill="Redux">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.661 15.549a1.315 1.315 0 0 0 1.185-1.386 1.363 1.363 0 0 0-1.35-1.302h-.048a1.352 1.352 0 0 0-1.303 1.397c.024.379.179.687.391.911-.827 1.609-2.07 2.794-3.954 3.788-1.266.663-2.604.912-3.905.734-1.089-.153-1.94-.64-2.463-1.421-.78-1.185-.852-2.462-.201-3.74a5.597 5.597 0 0 1 1.658-1.931 7.88 7.88 0 0 1-.331-1.218c-3.506 2.51-3.148 5.942-2.084 7.564.794 1.184 2.415 1.941 4.19 1.941.474 0 .972-.035 1.457-.154 3.077-.592 5.409-2.438 6.747-5.16l.011-.023z"
+                ></path>
+                <path
+                  d="M19.887 12.589c-1.834-2.154-4.533-3.337-7.611-3.337h-.403c-.2-.438-.661-.711-1.183-.711h-.036c-.744 0-1.325.64-1.301 1.385.023.71.627 1.302 1.35 1.302h.059a1.332 1.332 0 0 0 1.183-.828h.439c1.824 0 3.551.532 5.126 1.574 1.206.792 2.072 1.834 2.557 3.077.425 1.019.402 2.013-.035 2.843-.675 1.302-1.812 1.988-3.314 1.988-.947 0-1.871-.296-2.345-.509-.283.235-.758.626-1.102.863 1.042.473 2.096.746 3.113.746 2.309 0 4.023-1.302 4.676-2.557.709-1.422.651-3.813-1.161-5.859l-.012.023z"
+                ></path>
+                <path
+                  d="M7.647 15.975c.023.71.626 1.302 1.35 1.302h.048a1.334 1.334 0 0 0 1.302-1.397c0-.71-.616-1.301-1.338-1.301h-.048c-.048 0-.118 0-.178.022-.982-1.657-1.397-3.434-1.242-5.349.094-1.445.567-2.7 1.42-3.742.71-.888 2.048-1.326 2.96-1.35 2.556-.048 3.622 3.138 3.704 4.404l1.184.354C16.536 5.036 14.122 3 11.813 3 9.647 3 7.647 4.574 6.842 6.884c-1.102 3.077-.379 6.036.971 8.404-.118.154-.189.426-.166.687z"
+                ></path>
+              </svg>
+              <h4>Redux</h4>
             </div>
           </div>
         </div>
-        <div class="clientTestimonial">
-          <div class="clientImg">
-            <img src="./images/client2.png" alt="" />
+        <div class="skill-category">
+          <h3>Backend Development</h3>
+          <div class="skills-grid">
+            <div class="skill-card" data-skill="Node.js">
+              <i class="fab fa-node-js"></i>
+              <h4>Node.js</h4>
+            </div>
+            <div class="skill-card" data-skill="Express">
+              <i class="fas fa-server"></i>
+              <h4>Express.js</h4>
+            </div>
+            <div class="skill-card" data-skill="MongoDB">
+              <i class="fas fa-database"></i>
+              <h4>MongoDB</h4>
+            </div>
+            <div class="skill-card" data-skill="SQL">
+              <i class="fas fa-table"></i>
+              <h4>SQL</h4>
+            </div>
           </div>
-          <div class="clientTestimonialComment">
-            <div class="quote">
-              <i class="bx bxs-quote-alt-left"></i>
+        </div>
+        <div class="skill-category">
+          <h3>Tools & Technologies</h3>
+          <div class="skills-grid">
+            <div class="skill-card" data-skill="Git">
+              <i class="fab fa-git-alt"></i>
+              <h4>Git</h4>
             </div>
-            <div class="comment">
-              "Exceptional web development skills! The website he created for my
-              business not only looks stunning but also functions seamlessly. A
-              true professional in the field. Also his behaviour with the client
-              is very good."
+            <div class="skill-card" data-skill="GitHub">
+              <i class="fab fa-github"></i>
+              <h4>GitHub</h4>
             </div>
-            <div class="client">
-              <p class="clientName">Aditya Sharma</p>
-              <p class="clientPost">Graphic Designer, Freelancer</p>
+            <div class="skill-card" data-skill="Docker">
+              <i class="fab fa-docker"></i>
+              <h4>Docker</h4>
+            </div>
+            <div class="skill-card" data-skill="Mongoose">
+              <i class="fas fa-plug"></i>
+              <h4>Mongoose</h4>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <footer>
-      <h1 class="primaryColor highlightedText">
-        Prasan
-        <span class="transparentText highlightedText"> Poudel</span>
-      </h1>
-      <ul>
-        <li>
-          <a href="https://www.facebook.com/prasan.poudel.77" target="_blank"
-            ><i class="bx bxl-facebook-circle"></i
-          ></a>
-          <a href="mailto:prasanpoudel501.gmail.com"
-            ><i class="bx bxl-gmail"></i
-          ></a>
-          <a href="https://github.com/PrasanPoudel"
-            ><i class="bx bxl-github"></i
-          ></a>
-        </li>
-      </ul>
-      <p class="copyright">
-        Copyright &copy;2024- Prasan Poudel. All rights reserved.
-      </p>
-    </footer>
-    <script src="./script.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+      <div class="section-header">
+        <h2>My Latest Projects</h2>
+        <div class="underline"></div>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <img src="./Images/kaamsetu.png" alt="Job Portal Project" />
+            <div class="project-overlay">
+              <div class="project-links">
+                <a
+                  href="https://kaamsetu.vercel.app"
+                  target="_blank"
+                  class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>MERN Stack Job Portal Platform</h3>
+            <p>
+              A fully functional job portal platform with role based user
+              authentication and profile management.
+            </p>
+            <div class="project-tech">
+              <span>#React</span>
+              <span>#Redux</span>
+              <span>#Tailwind</span>
+              <span>#Node.js</span>
+              <span>#Express</span>
+              <span>#MongoDB</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">
+            <img src="./Images/foodee.png" alt="Food Restaurant App" />
+            <div class="project-overlay">
+              <div class="project-links">
+                <a
+                  href="https://foodee-prasanpoudel.vercel.app"
+                  target="_blank"
+                  class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Mern Stack Food Restaurant App</h3>
+            <p>
+              A fully functional food restaurant app that allows table booking,
+              food ordering and more importantly provides a platform to present
+              the restaurant in digital world.
+            </p>
+            <div class="project-tech">
+              <span>#React</span>
+              <span>#Redux</span>
+              <span>#Tailwind</span>
+              <span>#Node Js</span>
+              <span>#Express</span>
+              <span>#MongoDB</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">
+            <img
+              src="./Images/portfolio-madhav.png"
+              alt="Madhav Acharya's Portfolio"
+            />
+            <div class="project-overlay">
+              <div class="project-links">
+                <a
+                  href="https://prasanpoudel.github.io/Client_Portfolio-Madhav/"
+                  target="_blank"
+                  class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Clien's Portfolio</h3>
+            <p>
+              A portfolio website designed by client himself and that design
+              converted to code by me.
+            </p>
+            <div class="project-tech">
+              <span>#HTML</span>
+              <span>#CSS</span>
+              <span>#Javascript</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">
+            <img src="./Images/todoapp.png" alt="Todo App" />
+            <div class="project-overlay">
+              <div class="project-links">
+                <a
+                  href="https://prasanpoudel.github.io/TodoApp/"
+                  target="_blank"
+                  class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3>Todo App</h3>
+            <p>
+              A simple web app developed while learning how to work with react
+              js.
+            </p>
+            <div class="project-tech">
+              <span>#React</span>
+              <span>#Tailwind</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+      <div class="section-header">
+        <h2>What Our Clients Say</h2>
+        <div class="underline"></div>
+      </div>
+      <div class="testimonial-carousel">
+        <div class="testimonial-card">
+          <div class="client-image">
+            <img src="./Images/MadhavAcharya.png" alt="Madhav Acharya" />
+          </div>
+          <p class="testimonial-text">
+            "Outstanding work! My experience with this web developer was
+            fantastic. He delivered a visually appealing and user-friendly
+            website that exceeded my expectations. Highly recommended."
+          </p>
+          <h3>Madhav Acharya</h3>
+          <p class="client-role">UI/UX Designer, YodhhaLab.</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="client-image">
+            <img src="./Images/BeepinPandey.jpg" alt="Beepin Pandey" />
+          </div>
+          <p class="testimonial-text">
+            "Working with him has been an absolute game-changer for our job
+            portal. Their expertise in web development, attention to detail, and
+            problem-solving skills helped us create a seamless, user-friendly
+            platform that job seekers and employers can use efficiently."
+          </p>
+          <h3>Beepin Pandey</h3>
+          <p class="client-role">Owner, Nagrik Job Agency.</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="client-image">
+            <img src="./Images/AdityaSharma.png" alt="Aditya Sharma" />
+          </div>
+          <p class="testimonial-text">
+            "Exceptional web development skills! The website he created for my
+            business not only looks stunning but also functions seamlessly. A
+            true professional in the field. Also his behaviour with the client
+            is very good."
+          </p>
+          <h3>Aditya Sharma</h3>
+          <p class="client-role">Graphic Designer, Freelancer.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="section-header">
+        <h2>Get In Touch</h2>
+        <div class="underline"></div>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Let's Work Together</h3>
+          <p>
+            I'm currently available for freelance work or full-time positions.
+            If you have a project that needs some creative coding or you're
+            looking for a developer to join your team, feel free to reach out!
+          </p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <i class="fa-solid fa-at"></i>
+              <p>prasanpoudel501@gmail.com</p>
+            </div>
+            <div class="contact-method">
+              <i class="fas fa-phone"></i>
+              <p>+977 98410987**</p>
+            </div>
+            <div class="contact-method">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>Butwal, Nepal</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a
+              href="mailto:prasanpoudel501.gmail.com"
+              target="_blank"
+              class="social-link"
+              ><i class="fa-solid fa-at"></i
+            ></a>
+            <a
+              href="https://facebook.com/prasan.poudel.77"
+              target="_blank"
+              class="social-link"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a
+              href="https://github.com/PrasanPoudel"
+              target="_blank"
+              class="social-link"
+              ><i class="fab fa-github"></i
+            ></a>
+          </div>
+        </div>
+        <div class="contact-form-container">
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn primary-btn submit-btn">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+  <footer>
+    Copyright ©2024- Prasan Poudel. All rights reserved.
+  </footer>
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to Top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
   </body>
-  <script>
-    AOS.init({
-      duration: 750,
-    });
-  </script>
 </html>
