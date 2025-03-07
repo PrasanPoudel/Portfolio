@@ -240,7 +240,6 @@ header {
 
 .logo a {
   font-family: var(--heading-font);
-  font-weight: 700;
   font-size: 4rem;
   color: var(--text-color);
   transition: color var(--transition-fast);
@@ -332,7 +331,7 @@ header {
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 
 .hero-content {
@@ -845,8 +844,8 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   top: 0;
   background-color: var(--background-color);
   z-index: 50;
@@ -855,23 +854,24 @@ footer {
   width: fit-content;
   font-weight: bold;
   font-family: monospace;
-  font-size: 40px;
-  padding: 0 25px;
-  background: radial-gradient(circle closest-side,#000 94%,#0000) right/calc(200% - 1em) 100%;
-  animation: l24 1s infinite alternate linear;
+  text-shadow: 
+    0 0 0 rgb(255 0 0), 
+    0 0 0 rgb(0 255 0), 
+    0 0 0 rgb(0 0 255);
+  font-size: 30px;
+  animation: l32 1s infinite cubic-bezier(0.5,-2000,0.5,2000);
 }
-.loader::before {
-  content: "Loading...";
-  line-height: 1em;
-  color: #0000;
-  background: inherit;
-  background-image: radial-gradient(circle closest-side,#fff 94%,#000);
-  -webkit-background-clip:text;
-          background-clip:text;
+.loader:before {
+  content:"Loading...";
 }
 
-@keyframes l24{
-  100%{background-position: left}
+@keyframes l32{
+  25%,100% {
+  text-shadow: 
+     0.03px -0.01px 0.01px rgb(255 0 0), 
+     0.02px  0.02px 0     rgb(0 255 0), 
+    -0.02px  0.02px 0     rgb(0 0 255);
+  }
 }
 
 /* ===== BACK TO TOP BUTTON ===== */
