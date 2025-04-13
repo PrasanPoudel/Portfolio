@@ -1,3 +1,4 @@
+
 /* ===== VARIABLES ===== */
 :root {
   /* Colors - Light Theme */
@@ -22,7 +23,7 @@
 
   /* Typography */
   --heading-font: "Poppins", sans-serif;
-  --body-font: "Roboto", sans-serif;
+  --body-font: "Figtree", sans-serif;
 
   /* Spacing */
   --section-spacing: 100px;
@@ -110,6 +111,7 @@ a:hover {
 }
 .typewriter {
   height: 75px;
+  font-size: 2.7rem !important;
 }
 img {
   max-width: 100%;
@@ -188,6 +190,7 @@ section {
   color: transparent;
   display: inline-block;
   position: relative;
+  font-size: 4rem;
 }
 
 /* ===== DARK MODE ===== */
@@ -233,7 +236,8 @@ header {
 
 .logo a {
   font-family: var(--heading-font);
-  font-size: 4rem;
+  font-size: 3.3rem;
+  font-weight: 700;
   color: var(--text-color);
   transition: color var(--transition-fast);
 }
@@ -248,7 +252,7 @@ header {
 }
 
 .nav-link {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 2.5rem;
   color: var(--text-color);
   position: relative;
@@ -339,7 +343,7 @@ header {
 }
 
 .hero-text h1 {
-  font-size: 6.4rem;
+  font-size: 3.3rem;
   margin-bottom: 1rem;
   opacity: 0;
   transform: translateY(20px);
@@ -388,7 +392,7 @@ header {
   bottom: 3rem;
   left: 50%;
   transform: translateX(-50%);
-  animation: bounceDown 2s infinite;
+  animation: bounceDown 3s infinite;
 }
 
 .scroll-down a {
@@ -829,9 +833,10 @@ footer {
 }
 
 /* ==== preLoader animation ==== */
-.preLoaderContainer {
+.preLoader-container {
   position: fixed;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -840,30 +845,49 @@ footer {
   background-color: var(--background-color);
   z-index: 50;
 }
-.loader {
-  width: fit-content;
-  font-weight: bold;
-  font-family: monospace;
-  text-shadow: 
-    0 0 0 rgb(255 0 0), 
-    0 0 0 rgb(0 255 0), 
-    0 0 0 rgb(0 0 255);
-  font-size: 30px;
-  animation: l32 1s infinite cubic-bezier(0.5,-2000,0.5,2000);
+.loading-container p{
+  font-size: 2.7rem;
+  font-weight: 600;
 }
-.loader:before {
-  content:"Loading...";
+.loading-container {
+  display: flex;
+  width: 100px;
 }
+.loading {
+  width: 50px;
+  overflow-x: hidden !important;
+  animation: loading 1s infinite ease-in-out;
 
-@keyframes l32{
-  25%,100% {
-  text-shadow: 
-     0.03px -0.01px 0.01px rgb(255 0 0), 
-     0.02px  0.02px 0     rgb(0 255 0), 
-    -0.02px  0.02px 0     rgb(0 0 255);
+}
+@keyframes loading {
+  from{
+    width: 0%;
+  }
+  to{
+    width: 100%;
   }
 }
-
+.loader {    
+  --r1: 154%;
+  --r2: 68.5%;
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%; 
+  background:
+    radial-gradient(var(--r1) var(--r2) at top   ,#0000 79.5%,#269af2 80%),
+    radial-gradient(var(--r1) var(--r2) at bottom,#269af2 79.5%,#0000 80%),
+    radial-gradient(var(--r1) var(--r2) at top   ,#0000 79.5%,#269af2 80%),
+    #ccc;
+  background-size: 50.5% 220%;
+  background-position: -100% 0%,0% 0%,100% 0%;
+  background-repeat:no-repeat;
+  animation: l9 2s infinite linear;
+}
+@keyframes l9 {
+    33%  {background-position:    0% 33% ,100% 33% ,200% 33% }
+    66%  {background-position: -100%  66%,0%   66% ,100% 66% }
+    100% {background-position:    0% 100%,100% 100%,200% 100%}
+}
 /* ===== BACK TO TOP BUTTON ===== */
 #back-to-top {
   position: fixed;
@@ -947,16 +971,12 @@ footer {
   html {
     font-size: 8px;
   }
-  .hero-section {
-    height: 110vh;
-  }
   .about-content,
   .contact-container {
     flex-direction: column;
     gap: 3rem;
   }
   .hero-content {
-    text-align: center;
     flex-direction: column;
   }
   .hero-content .hero-image {

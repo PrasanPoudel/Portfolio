@@ -1,4 +1,4 @@
-const preLoaderContainer= document.querySelector('.preLoaderContainer');
+const preLoaderContainer= document.querySelector('.preLoader-container');
 window.addEventListener('scroll', function() {
   preLoaderContainer.style.display = "none";
 });
