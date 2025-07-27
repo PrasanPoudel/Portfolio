@@ -285,7 +285,7 @@ header {
   font-size: 1.8rem;
 }
 .theme-toggle i {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 .fa-sun {
   display: none !important;
@@ -758,12 +758,12 @@ header {
 
 .social-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 3rem;
 }
 
 .social-link {
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: var(--border-radius-round);
   background-color: var(--background-color);
   display: flex;
@@ -773,7 +773,7 @@ header {
 }
 
 .social-link i {
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--text-color);
   transition: color var(--transition-medium);
 }
