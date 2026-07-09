@@ -1,0 +1,7 @@
+{
+  "terminal.integrated.shellIntegration.quickFixEnabled": false,
+  "workbench.editor.languageDetectionHints": {
+    "notebookEditors": false,
+    "untitledEditors": false
+  }
+}

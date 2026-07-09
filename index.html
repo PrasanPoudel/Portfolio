@@ -1,521 +1,1157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    />
-    <title>Prasan Poudel | Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="./images/icon.png" />
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Google Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prasan Poudel — Full-Stack Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --bg: #0f1319;
+        --panel: #151a23;
+        --panel-2: #1b2130;
+        --border: #2a3142;
+        --text: #e7eaf0;
+        --muted: #7c879c;
+        --mint: #6ee7b7;
+        --gold: #f0b860;
+        --lilac: #b4a7f5;
+        --rose: #f28b82;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+      }
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+      ::selection {
+        background: var(--mint);
+        color: #0f1319;
+      }
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 6px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--muted);
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--mint);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      .code-panel {
+        counter-reset: line;
+      }
+      .code-panel .ln {
+        counter-increment: line;
+        position: relative;
+        padding-left: 3rem;
+        line-height: 1.85;
+      }
+      .code-panel .ln::before {
+        content: counter(line);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.4rem;
+        text-align: right;
+        color: var(--muted);
+        opacity: 0.45;
+        font-size: 0.78em;
+        user-select: none;
+      }
+
+      .key {
+        color: var(--gold);
+      }
+      .str {
+        color: var(--mint);
+      }
+      .punct {
+        color: var(--muted);
+      }
+      .kw {
+        color: var(--lilac);
+      }
+      .comment {
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .traffic-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 9999px;
+        display: inline-block;
+      }
+
+      .tab-link {
+        color: var(--muted);
+        border-bottom: 2px solid transparent;
+        transition:
+          color 0.15s ease,
+          border-color 0.15s ease,
+          background-color 0.15s ease;
+      }
+      .tab-link:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .tab-link.active {
+        color: var(--text);
+        border-color: var(--mint);
+        background: rgba(110, 231, 183, 0.06);
+      }
+
+      .tree-link {
+        color: var(--muted);
+        transition:
+          color 0.15s ease,
+          background-color 0.15s ease,
+          padding-left 0.15s ease;
+        border-left: 2px solid transparent;
+      }
+      .tree-link:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .tree-link.active {
+        color: var(--mint);
+        border-color: var(--mint);
+        background: rgba(110, 231, 183, 0.06);
+      }
+
+      .cursor-blink {
+        display: inline-block;
+        width: 9px;
+        height: 1.15em;
+        background: var(--mint);
+        margin-left: 4px;
+        vertical-align: text-bottom;
+        animation: blink 1.05s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      #sidebar {
+        transition: transform 0.25s ease;
+      }
+      @media (max-width: 767px) {
+        #sidebar {
+          position: fixed;
+          z-index: 40;
+          top: 44px;
+          bottom: 0;
+          left: 0;
+          transform: translateX(-100%);
+          width: 78vw;
+          max-width: 300px;
+        }
+        #sidebar.open {
+          transform: translateX(0);
+        }
+        #scrim {
+          display: none;
+          position: fixed;
+          inset: 44px 0 0 0;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 30;
+        }
+        #scrim.open {
+          display: block;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .cursor-blink {
+          animation: none;
+          opacity: 1;
+        }
+        * {
+          transition-duration: 0.001ms !important;
+          animation-duration: 0.001ms !important;
+        }
+      }
+
+      .copy-btn {
+        transition: transform 0.12s ease;
+      }
+      .copy-btn:active {
+        transform: scale(0.94);
+      }
+    </style>
   </head>
-  <body class="light-mode">
-    <!-- Preloader -->
-    <div class="preLoader-container">
-      <div class="loader"></div>
-      <div class="loading-container">
-        <p>Loading</p>
-        <p class="loading">...</p>
+  <body class="min-h-screen">
+    <!-- Title bar -->
+    <header
+      class="fixed top-0 inset-x-0 h-11 z-50 flex items-center gap-3 px-3 md:px-4 border-b"
+      style="background: var(--panel); border-color: var(--border)"
+    >
+      <button
+        id="menuToggle"
+        class="md:hidden text-[var(--muted)] hover:text-[var(--text)] mr-1"
+        aria-label="Toggle file explorer"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="flex items-center gap-1.5 mr-3 shrink-0">
+        <span class="traffic-dot" style="background: var(--rose)"></span>
+        <span class="traffic-dot" style="background: var(--gold)"></span>
+        <span class="traffic-dot" style="background: var(--mint)"></span>
       </div>
-    </div>
-    <!-- Navigation -->
-    <header>
-      <nav class="navbar">
-        <div class="logo">
-          <a href="#hero">Portfolio</a>
-        </div>
-        <ul class="nav-menu">
-          <li class="nav-item"><a href="#hero" class="nav-link">Home</a></li>
-          <li class="nav-item">
-            <a href="#about" class="nav-link">About Me</a>
-          </li>
-          <li class="nav-item">
-            <a href="#skills" class="nav-link">My Skills</a>
-          </li>
-          <li class="nav-item">
-            <a href="#projects" class="nav-link">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contact" class="nav-link">Contact Me</a>
-          </li>
-        </ul>
-        <div class="theme-toggle">
-          <i class="fas fa-moon"></i>
-          <i class="fas fa-sun"></i>
-        </div>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
+      <nav class="mono text-[13px] flex overflow-x-auto no-scrollbar">
+        <a
+          href="#about"
+          class="tab-link px-3 h-11 flex items-center gap-2 shrink-0"
+          data-tab="about"
+          ><i class="fa-regular fa-file-lines text-[11px]"></i>about.md</a
+        >
+        <a
+          href="#skills"
+          class="tab-link px-3 h-11 flex items-center gap-2 shrink-0"
+          data-tab="skills"
+          ><i class="fa-regular fa-file-code text-[11px]"></i>skills.json</a
+        >
+        <a
+          href="#projects"
+          class="tab-link px-3 h-11 flex items-center gap-2 shrink-0"
+          data-tab="projects"
+          ><i class="fa-regular fa-folder-open text-[11px]"></i>projects/</a
+        >
+        <a
+          href="#education"
+          class="tab-link px-3 h-11 flex items-center gap-2 shrink-0"
+          data-tab="education"
+          ><i class="fa-regular fa-file-lines text-[11px]"></i>education.md</a
+        >
+        <a
+          href="#experience"
+          class="tab-link px-3 h-11 flex items-center gap-2 shrink-0"
+          data-tab="experience"
+          ><i class="fa-solid fa-terminal text-[11px]"></i>experience.log</a
+        >
       </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>
-            Hi, I'm <br />
-            <span class="highlight">Prasan Poudel</span>
+    <div id="scrim"></div>
+
+    <div class="pt-11 flex max-w-[1400px] mx-auto">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-[260px] shrink-0 border-r flex flex-col"
+        style="background: var(--panel); border-color: var(--border)"
+      >
+        <div class="p-4 flex-1">
+          <p class="mono text-[11px] tracking-widest text-[var(--muted)] mb-3">
+            EXPLORER
+          </p>
+          <p class="mono text-[13px] font-semibold mb-2">
+            <i
+              class="fa-regular fa-folder-open mr-2"
+              style="color: var(--gold)"
+            ></i
+            >prasan-poudel
+          </p>
+          <div
+            class="ml-2 flex flex-col mono text-[13px] gap-0.5 border-l"
+            style="border-color: var(--border)"
+          >
+            <a
+              href="#about"
+              class="tree-link nav-link py-1.5 pl-3"
+              data-tab="about"
+              ><i class="fa-regular fa-file-lines mr-2 text-[12px]"></i
+              >about.md</a
+            >
+            <a
+              href="#skills"
+              class="tree-link nav-link py-1.5 pl-3"
+              data-tab="skills"
+              ><i
+                class="fa-regular fa-file-code mr-2 text-[12px]"
+                style="color: var(--gold)"
+              ></i
+              >skills.json</a
+            >
+            <a
+              href="#projects"
+              class="tree-link nav-link py-1.5 pl-3"
+              data-tab="projects"
+              ><i
+                class="fa-regular fa-folder mr-2 text-[12px]"
+                style="color: var(--gold)"
+              ></i
+              >projects/</a
+            >
+            <div
+              class="ml-4 flex flex-col border-l"
+              style="border-color: var(--border)"
+            >
+              <a href="#zentro" class="tree-link nav-link py-1 pl-3 text-[12px]"
+                ><i class="fa-brands fa-js mr-2" style="color: var(--gold)"></i
+                >zentro.js</a
+              >
+              <a
+                href="#oconnect"
+                class="tree-link nav-link py-1 pl-3 text-[12px]"
+                ><i class="fa-brands fa-js mr-2" style="color: var(--gold)"></i
+                >oconnect.js</a
+              >
+              <a
+                href="#kaamsetu"
+                class="tree-link nav-link py-1 pl-3 text-[12px]"
+                ><i class="fa-brands fa-js mr-2" style="color: var(--gold)"></i
+                >kaamsetu.js</a
+              >
+            </div>
+            <a
+              href="#education"
+              class="tree-link nav-link py-1.5 pl-3"
+              data-tab="education"
+              ><i class="fa-regular fa-file-lines mr-2 text-[12px]"></i
+              >education.md</a
+            >
+            <a
+              href="#experience"
+              class="tree-link nav-link py-1.5 pl-3"
+              data-tab="experience"
+              ><i
+                class="fa-solid fa-terminal mr-2 text-[12px]"
+                style="color: var(--mint)"
+              ></i
+              >experience.log</a
+            >
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="flex-1 min-w-0">
+        <!-- Hero -->
+        <section
+          id="about"
+          class="px-5 md:px-10 pt-12 pb-10 border-b"
+          style="border-color: var(--border)"
+        >
+          <p class="mono text-[13px] text-[var(--muted)] mb-3">
+            // prasanpoudel.com.np
+          </p>
+          <h1
+            class="mono font-extrabold text-[clamp(2rem,6vw,3.5rem)] leading-none tracking-tight"
+          >
+            Prasan <span style="color: var(--mint)">Poudel</span>
           </h1>
-          <h2 class="typewriter"></h2>
-          <div class="hero-buttons">
-            <!-- <a href="#projects" class="btn primary-btn">View My Work</a> -->
-            <a href="#contact" class="btn secondary-btn">Get In Touch</a>
-          </div>
-          <div class="social-links">
+          <p
+            class="mt-4 text-[15px] text-justify md:text-base text-[var(--muted)] max-w-2xl"
+          >
+            Full-stack developer building with the MERN stack — React, Node.js,
+            Express, MongoDB. BSc CSIT student at Tribhuvan University.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3 mono text-[13px]">
             <a
-              href="mailto:prasanpoudel501.gmail.com"
-              target="_blank"
-              class="social-link"
-              ><i class="fa-solid fa-at"></i
-            ></a>
+              href="mailto:prasanpoudel501@gmail.com"
+              class="px-3 py-2 rounded border flex items-center gap-2 hover:border-[var(--mint)] hover:text-[var(--mint)] transition-colors"
+              style="border-color: var(--border)"
+              ><i class="fa-solid fa-envelope"></i>prasanpoudel501@gmail.com</a
+            >
             <a
-              href="https://facebook.com/prasan.poudel.77"
-              target="_blank"
-              class="social-link"
-              ><i class="fab fa-facebook"></i
-            ></a>
-            <a
-              href="https://github.com/PrasanPoudel"
-              target="_blank"
-              class="social-link"
-              ><i class="fab fa-github"></i
-            ></a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img
-            src="./images/Portrait.png"
-            alt="Developer Portrait"
-            class="profile-img"
-          />
-        </div>
-      </div>
-      <div class="scroll-down">
-        <a href="#about"><i class="fas fa-chevron-down"></i></a>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-      <div class="section-header">
-        <h2>About Me</h2>
-        <div class="underline"></div>
-      </div>
-      <div class="about-content">
-        <div class="about-image">
-          <img src="./images/Portrait.png" alt="Developer Working" />
-        </div>
-        <div class="about-text">
-          <p>
-            I'm a highly skilled web developer and also a computer science
-            student with a passion for creating amazing and engaging web
-            applications. I am currently studying bachelor in computer science
-            and information technology from Tribhuvan University of Nepal. I am
-            highly skilled in working with MERN(MongoDB, Express Js, React Js,
-            Node Js) stack applications and also version control tools like git
-            & github.
-          </p>
-          <p>
-            I am always looking for new challenges and opportunities to expand
-            my skill set. I am passionate about creating innovative and
-            effective web solutions that make a fulfillment in my client's
-            demand.
-          </p>
-          <p>
-            When I'm not coding, you'll find me exploring new technologies,
-            contributing to open-source projects, or enjoying outdoor
-            adventures. I believe that the best digital solutions come from
-            understanding both technical requirements and human needs.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section">
-      <div class="section-header">
-        <h2>My Skills</h2>
-        <div class="underline"></div>
-      </div>
-      <div class="skills-container">
-        <div class="skill-category">
-          <h3>Frontend Development</h3>
-          <div class="skills-grid">
-            <div class="skill-card" data-skill="HTML5">
-              <i class="fab fa-html5"></i>
-              <h4>HTML5</h4>
-            </div>
-            <div class="skill-card" data-skill="CSS3">
-              <i class="fab fa-css3-alt"></i>
-              <h4>CSS3</h4>
-            </div>
-            <div class="skill-card" data-skill="Tailwind">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M18.5 9.51a4.22 4.22 0 0 1-1.91-1.34A5.77 5.77 0 0 0 12 6a4.72 4.72 0 0 0-5 4 3.23 3.23 0 0 1 3.5-1.49 4.32 4.32 0 0 1 1.91 1.35A5.77 5.77 0 0 0 17 12a4.72 4.72 0 0 0 5-4 3.2 3.2 0 0 1-3.5 1.51zm-13 4.98a4.22 4.22 0 0 1 1.91 1.34A5.77 5.77 0 0 0 12 18a4.72 4.72 0 0 0 5-4 3.23 3.23 0 0 1-3.5 1.49 4.32 4.32 0 0 1-1.91-1.35A5.8 5.8 0 0 0 7 12a4.72 4.72 0 0 0-5 4 3.2 3.2 0 0 1 3.5-1.51z"
-                ></path>
-              </svg>
-              <h4>Tailwind CSS</h4>
-            </div>
-            <div class="skill-card" data-skill="JavaScript">
-              <i class="fab fa-js"></i>
-              <h4>JavaScript</h4>
-            </div>
-            <div class="skill-card" data-skill="React">
-              <i class="fab fa-react"></i>
-              <h4>ReactJS</h4>
-            </div>
-            <div class="skill-card" data-skill="Redux">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M15.661 15.549a1.315 1.315 0 0 0 1.185-1.386 1.363 1.363 0 0 0-1.35-1.302h-.048a1.352 1.352 0 0 0-1.303 1.397c.024.379.179.687.391.911-.827 1.609-2.07 2.794-3.954 3.788-1.266.663-2.604.912-3.905.734-1.089-.153-1.94-.64-2.463-1.421-.78-1.185-.852-2.462-.201-3.74a5.597 5.597 0 0 1 1.658-1.931 7.88 7.88 0 0 1-.331-1.218c-3.506 2.51-3.148 5.942-2.084 7.564.794 1.184 2.415 1.941 4.19 1.941.474 0 .972-.035 1.457-.154 3.077-.592 5.409-2.438 6.747-5.16l.011-.023z"
-                ></path>
-                <path
-                  d="M19.887 12.589c-1.834-2.154-4.533-3.337-7.611-3.337h-.403c-.2-.438-.661-.711-1.183-.711h-.036c-.744 0-1.325.64-1.301 1.385.023.71.627 1.302 1.35 1.302h.059a1.332 1.332 0 0 0 1.183-.828h.439c1.824 0 3.551.532 5.126 1.574 1.206.792 2.072 1.834 2.557 3.077.425 1.019.402 2.013-.035 2.843-.675 1.302-1.812 1.988-3.314 1.988-.947 0-1.871-.296-2.345-.509-.283.235-.758.626-1.102.863 1.042.473 2.096.746 3.113.746 2.309 0 4.023-1.302 4.676-2.557.709-1.422.651-3.813-1.161-5.859l-.012.023z"
-                ></path>
-                <path
-                  d="M7.647 15.975c.023.71.626 1.302 1.35 1.302h.048a1.334 1.334 0 0 0 1.302-1.397c0-.71-.616-1.301-1.338-1.301h-.048c-.048 0-.118 0-.178.022-.982-1.657-1.397-3.434-1.242-5.349.094-1.445.567-2.7 1.42-3.742.71-.888 2.048-1.326 2.96-1.35 2.556-.048 3.622 3.138 3.704 4.404l1.184.354C16.536 5.036 14.122 3 11.813 3 9.647 3 7.647 4.574 6.842 6.884c-1.102 3.077-.379 6.036.971 8.404-.118.154-.189.426-.166.687z"
-                ></path>
-              </svg>
-              <h4>Redux</h4>
-            </div>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h3>Backend Development</h3>
-          <div class="skills-grid">
-            <div class="skill-card" data-skill="Node.js">
-              <i class="fab fa-node-js"></i>
-              <h4>Node.js</h4>
-            </div>
-            <div class="skill-card" data-skill="Express">
-              <i class="fas fa-server"></i>
-              <h4>Express.js</h4>
-            </div>
-            <div class="skill-card" data-skill="MongoDB">
-              <i class="fas fa-database"></i>
-              <h4>MongoDB</h4>
-            </div>
-            <div class="skill-card" data-skill="SQL">
-              <i class="fas fa-table"></i>
-              <h4>SQL</h4>
-            </div>
-          </div>
-        </div>
-        <div class="skill-category">
-          <h3>Tools & Technologies</h3>
-          <div class="skills-grid">
-            <div class="skill-card" data-skill="Git">
-              <i class="fab fa-git-alt"></i>
-              <h4>Git</h4>
-            </div>
-            <div class="skill-card" data-skill="GitHub">
-              <i class="fab fa-github"></i>
-              <h4>GitHub</h4>
-            </div>
-            <div class="skill-card" data-skill="Docker">
-              <i class="fab fa-docker"></i>
-              <h4>Docker</h4>
-            </div>
-            <div class="skill-card" data-skill="Mongoose">
-              <i class="fas fa-plug"></i>
-              <h4>Mongoose</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <!-- <section id="projects" class="projects-section">
-      <div class="section-header">
-        <h2>My Latest Projects</h2>
-        <div class="underline"></div>
-      </div>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="./images/kaamsetu.png" alt="Job Portal Project" />
-            <div class="project-overlay">
-              <div class="project-links">
-                <a
-                  href="https://kaamsetu.vercel.app"
-                  target="_blank"
-                  class="project-link"
-                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3>MERN Stack Job Portal Platform</h3>
-            <p>
-              A fully functional job portal platform with role based user
-              authentication and profile management.
-            </p>
-            <div class="project-tech">
-              <span>#React</span>
-              <span>#Redux</span>
-              <span>#Tailwind</span>
-              <span>#Node.js</span>
-              <span>#Express</span>
-              <span>#MongoDB</span>
-              <span>#MongooseORM</span>
-              <span>#Cloudinary</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-image">
-            <img src="./images/foodee.png" alt="Food Restaurant App" />
-            <div class="project-overlay">
-              <div class="project-links">
-                <a
-                  href="https://foodee-prasanpoudel.vercel.app"
-                  target="_blank"
-                  class="project-link"
-                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3>Mern Stack Food Restaurant App</h3>
-            <p>
-              A fully functional food restaurant app that allows table booking,
-              food ordering and more importantly provides a platform to present
-              the restaurant in digital world.
-            </p>
-            <div class="project-tech">
-              <span>#React</span>
-              <span>#Redux</span>
-              <span>#Tailwind</span>
-              <span>#Node Js</span>
-              <span>#Express</span>
-              <span>#MongoDB</span>
-              <span>#MongooseORM</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-image">
-            <img
-              src="./images/portfolio-madhav.png"
-              alt="Madhav Acharya's Portfolio"
-            />
-            <div class="project-overlay">
-              <div class="project-links">
-                <a
-                  href="https://prasanpoudel.github.io/Client_Portfolio-Madhav/"
-                  target="_blank"
-                  class="project-link"
-                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3>Clien's Portfolio</h3>
-            <p>
-              A portfolio website designed by client himself and that design
-              converted to code by me.
-            </p>
-            <div class="project-tech">
-              <span>#HTML</span>
-              <span>#CSS</span>
-              <span>#Javascript</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-image">
-            <img src="./images/FinanceFlow.png" alt="Finance Flow" />
-            <div class="project-overlay">
-              <div class="project-links">
-                <a
-                  href="https://financeflow-one.vercel.app/"
-                  target="_blank"
-                  class="project-link"
-                  ><i class="fas fa-external-link-alt"></i> Live Demo</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <h3>Expense Tracker</h3>
-            <p>
-              A simple web app developed while learning how to work with react
-              js. This web app helps to track finance expenses effectively.
-            </p>
-            <div class="project-tech">
-              <span>#React</span>
-              <span>#Redux</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-    <!-- Testimonial Section -->
-    <section class="testimonial-section">
-      <div class="section-header">
-        <h2>What Our Clients Say</h2>
-        <div class="underline"></div>
-      </div>
-      <div class="testimonial-carousel">
-        <div class="testimonial-card">
-          <div class="client-image">
-            <img src="./images/MadhavAcharya.png" alt="Madhav Acharya" />
-          </div>
-          <p class="testimonial-text">
-            "Outstanding work! My experience with this web developer was
-            fantastic. He delivered a visually appealing and user-friendly
-            website that exceeded my expectations. Highly recommended."
-          </p>
-          <h3>Madhav Acharya</h3>
-          <p class="client-role">UI/UX Designer, YodhhaLab.</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="client-image">
-            <img src="./images/BeepinPandey.jpg" alt="Beepin Pandey" />
-          </div>
-          <p class="testimonial-text">
-            "Working with him has been an absolute game-changer for our job
-            portal. Their expertise in web development, attention to detail, and
-            problem-solving skills helped us create a seamless, user-friendly
-            platform that job seekers and employers can use efficiently."
-          </p>
-          <h3>Beepin Pandey</h3>
-          <p class="client-role">Owner, Nagrik Job Agency.</p>
-        </div>
-        <div class="testimonial-card">
-          <div class="client-image">
-            <img src="./images/AdityaSharma.png" alt="Aditya Sharma" />
-          </div>
-          <p class="testimonial-text">
-            "Exceptional web development skills! The website he created for my
-            business not only looks stunning but also functions seamlessly. A
-            true professional in the field. Also his behaviour with the client
-            is very good."
-          </p>
-          <h3>Aditya Sharma</h3>
-          <p class="client-role">Graphic Designer, Freelancer.</p>
-        </div>
-      </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-      <div class="section-header">
-        <h2>Get In Touch</h2>
-        <div class="underline"></div>
-      </div>
-      <div class="contact-container">
-        <div class="contact-info">
-          <h3>Let's Work Together</h3>
-          <p>
-            I'm currently available for freelance work or full-time positions.
-            If you have a project that needs some creative coding or you're
-            looking for a developer to join your team, feel free to reach out!
-          </p>
-          <div class="contact-methods">
-            <div class="contact-method">
-              <i class="fa-solid fa-at"></i>
-              <p>prasanpoudel501@gmail.com</p>
-            </div>
-            <div class="contact-method">
-              <i class="fas fa-phone"></i>
-              <p>+977 98410987**</p>
-            </div>
-            <div class="contact-method">
-              <i class="fas fa-map-marker-alt"></i>
-              <p>Butwal, Nepal</p>
-            </div>
-          </div>
-          <div class="social-links">
-            <a
-              href="mailto:prasanpoudel501.gmail.com"
-              target="_blank"
-              class="social-link"
-              ><i class="fa-solid fa-at"></i
-            ></a>
-            <a
-              href="https://facebook.com/prasan.poudel.77"
-              target="_blank"
-              class="social-link"
-              ><i class="fab fa-facebook"></i
-            ></a>
+              href="tel:+9779841098772"
+              class="px-3 py-2 rounded border flex items-center gap-2 hover:border-[var(--mint)] hover:text-[var(--mint)] transition-colors"
+              style="border-color: var(--border)"
+              ><i class="fa-solid fa-phone"></i>+977 9841098772</a
+            >
             <a
               href="https://github.com/PrasanPoudel"
               target="_blank"
-              class="social-link"
-              ><i class="fab fa-github"></i
-            ></a>
+              rel="noopener"
+              class="px-3 py-2 rounded border flex items-center gap-2 hover:border-[var(--mint)] hover:text-[var(--mint)] transition-colors"
+              style="border-color: var(--border)"
+              ><i class="fa-brands fa-github"></i>github.com/PrasanPoudel</a
+            >
+            <a
+              href="https://prasanpoudel.com.np"
+              target="_blank"
+              rel="noopener"
+              class="px-3 py-2 rounded border flex items-center gap-2 hover:border-[var(--mint)] hover:text-[var(--mint)] transition-colors"
+              style="border-color: var(--border)"
+              ><i class="fa-solid fa-globe"></i>prasanpoudel.com.np</a
+            >
+            <span
+              class="px-3 py-2 rounded border flex items-center gap-2"
+              style="border-color: var(--border)"
+              ><i class="fa-solid fa-location-dot"></i>Milanchowk, Butwal-9,
+              Nepal</span
+            >
           </div>
-        </div>
-        <div class="contact-form-container">
-          <form id="contact-form" class="contact-form">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" required />
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-              ></textarea>
-            </div>
-            <button type="submit" class="btn primary-btn submit-btn">
-              Send Message
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- Footer Section -->
-    <footer>Copyright ©2024- Prasan Poudel. All rights reserved.</footer>
-    <!-- Back to Top Button -->
-    <button id="back-to-top" aria-label="Back to Top">
-      <i class="fas fa-arrow-up"></i>
-    </button>
+        <!-- about.md -->
+        <section
+          class="px-5 md:px-10 py-10 border-b scroll-mt-11"
+          style="border-color: var(--border)"
+        >
+          <p class="mono text-[13px] mb-4">
+            <span class="comment"># about.md</span>
+          </p>
+          <div
+            class="pl-4 md:pl-5 border-l-2"
+            style="border-color: var(--panel-2)"
+          >
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+              <img
+                src="images/portrait.png"
+                alt="Portrait of the portfolio author"
+                class="w-40 h-40 md:w-48 md:h-48 rounded-lg object-cover border-2 border-green-200"
+                style="border-color: var(--border); background: var(--panel)"
+                loading="lazy"
+              />
+              <p
+                class="text-[15px] md:text-base text-justify leading-relaxed text-[var(--text)]/90"
+              >
+                Computer Science and Information Technology student at Tribhuvan
+                University with practical experience in full-stack web
+                development using the MERN stack. Skilled in designing and
+                developing scalable web applications, RESTful APIs,
+                authentication systems, database management, and machine
+                learning integration. Passionate about software engineering,
+                problem solving, and building user-focused digital solutions.
+              </p>
+            </div>
+          </div>
+        </section>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+        <!-- skills.json -->
+        <section
+          id="skills"
+          class="px-5 md:px-10 py-10 border-b scroll-mt-11"
+          style="border-color: var(--border)"
+        >
+          <p class="mono text-[13px] text-[var(--muted)] mb-4">skills.json</p>
+          <div
+            class="rounded-lg border overflow-hidden"
+            style="background: var(--panel); border-color: var(--border)"
+          >
+            <div
+              class="code-panel mono text-[13px] md:text-[13.5px] py-4 pr-4 overflow-x-auto"
+            >
+              <div class="ln"><span class="punct">{</span></div>
+              <div class="ln">
+                <span class="key">"languages"</span
+                ><span class="punct">: [</span
+                ><span class="str">"JavaScript"</span
+                ><span class="punct">],</span>
+              </div>
+              <div class="ln">
+                <span class="key">"frontend"</span><span class="punct">: [</span
+                ><span class="str">"React.js"</span><span class="punct">, </span
+                ><span class="str">"Redux Toolkit"</span
+                ><span class="punct">, </span
+                ><span class="str">"Tailwind CSS"</span
+                ><span class="punct">, </span
+                ><span class="str">"Bootstrap"</span
+                ><span class="punct">, </span><span class="str">"HTML5"</span
+                ><span class="punct">, </span><span class="str">"CSS3"</span
+                ><span class="punct">, </span><span class="str">"jQuery"</span
+                ><span class="punct">],</span>
+              </div>
+              <div class="ln">
+                <span class="key">"backend"</span><span class="punct">: [</span
+                ><span class="str">"Node.js"</span><span class="punct">, </span
+                ><span class="str">"Express.js"</span
+                ><span class="punct">, </span
+                ><span class="str">"REST API Development"</span
+                ><span class="punct">],</span>
+              </div>
+              <div class="ln">
+                <span class="key">"database"</span><span class="punct">: [</span
+                ><span class="str">"MongoDB"</span><span class="punct">, </span
+                ><span class="str">"MySQL"</span><span class="punct">],</span>
+              </div>
+              <div class="ln">
+                <span class="key">"tools"</span><span class="punct">: [</span
+                ><span class="str">"Git"</span><span class="punct">, </span
+                ><span class="str">"GitHub"</span><span class="punct">, </span
+                ><span class="str">"Docker"</span><span class="punct">, </span
+                ><span class="str">"JWT Authentication"</span
+                ><span class="punct">, </span><span class="str">"Postman"</span
+                ><span class="punct">]</span>
+              </div>
+              <div class="ln"><span class="punct">}</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- projects/ -->
+        <section
+          id="projects"
+          class="px-5 md:px-10 py-10 border-b scroll-mt-11"
+          style="border-color: var(--border)"
+        >
+          <p class="mono text-[13px] text-[var(--muted)] mb-6">
+            <i
+              class="fa-regular fa-folder-open mr-2"
+              style="color: var(--gold)"
+            ></i
+            >projects/
+          </p>
+
+          <div class="flex flex-col gap-8">
+            <!-- Zentro -->
+            <article
+              id="zentro"
+              class="rounded-lg border overflow-hidden scroll-mt-14"
+              style="background: var(--panel); border-color: var(--border)"
+            >
+              <div
+                class="px-5 pt-5 pb-4 border-b"
+                style="border-color: var(--border)"
+              >
+                <p
+                  class="mono text-[12px] text-[var(--muted)] flex items-center gap-2 mb-1.5"
+                >
+                  <i class="fa-brands fa-js" style="color: var(--gold)"></i
+                  >zentro.js
+                </p>
+                <h3 class="font-semibold text-lg md:text-xl">
+                  Zentro
+                  <span
+                    class="font-normal text-[var(--muted)] text-sm md:text-base"
+                    >— E-Commerce Platform</span
+                  >
+                </h3>
+                <a
+                  href="https://github.com/PrasanPoudel/MERN_ECOMMERCE"
+                  target="_blank"
+                  rel="noopener"
+                  class="mono text-[12.5px] mt-3 inline-flex items-center gap-2 px-3 py-2 rounded border hover:border-[var(--mint)] hover:text-[var(--mint)] transition-colors max-w-full"
+                  style="border-color: var(--border); color: var(--muted)"
+                >
+                  <i class="fa-brands fa-github shrink-0"></i
+                  ><span class="break-all"
+                    >github.com/PrasanPoudel/MERNECOMMERCE</span
+                  >
+                </a>
+                <div class="flex flex-wrap gap-2 mt-4">
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >MongoDB</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >Express.js</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >React.js</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >Node.js</span
+                  >
+                </div>
+              </div>
+              <ul
+                class="p-5 flex flex-col gap-3 text-[14px] md:text-[14.5px] leading-relaxed"
+              >
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Developed a full-stack e-commerce platform using MongoDB,
+                    Express.js, React.js, and Node.js.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Implemented secure authentication and role-based access
+                    control for customers and administrators.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Built shopping cart, product management, and order tracking
+                    functionalities.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Designed responsive user interfaces using React.js and
+                    modern CSS frameworks.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Developed RESTful APIs and integrated MongoDB for efficient
+                    data management.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Simulated payment processing workflow for complete order
+                    handling.</span
+                  >
+                </li>
+              </ul>
+            </article>
+
+            <!-- OCONNECT -->
+            <article
+              id="oconnect"
+              class="rounded-lg border overflow-hidden scroll-mt-14"
+              style="background: var(--panel); border-color: var(--border)"
+            >
+              <div
+                class="px-5 pt-5 pb-4 border-b"
+                style="border-color: var(--border)"
+              >
+                <p
+                  class="mono text-[12px] text-[var(--muted)] flex items-center gap-2 mb-1.5"
+                >
+                  <i class="fa-brands fa-js" style="color: var(--gold)"></i
+                  >oconnect.js
+                </p>
+                <h3 class="font-semibold text-lg md:text-xl">
+                  OCONNECT
+                  <span
+                    class="font-normal text-[var(--muted)] text-sm md:text-base"
+                    >— Contact Record Management System</span
+                  >
+                </h3>
+                <a
+                  href="https://github.com/PrasanPoudel/OCONNECT"
+                  target="_blank"
+                  rel="noopener"
+                  class="mono text-[12.5px] mt-3 inline-flex items-center gap-2 px-3 py-2 rounded border hover:border-[var(--mint)] hover:text-[var(--mint)] transition-colors max-w-full"
+                  style="border-color: var(--border); color: var(--muted)"
+                >
+                  <i class="fa-brands fa-github shrink-0"></i
+                  ><span class="break-all"
+                    >github.com/PrasanPoudel/OCONNECT</span
+                  >
+                </a>
+                <div class="flex flex-wrap gap-2 mt-4">
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >Node.js</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >Express.js</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >MongoDB (Mongoose)</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >EJS</span
+                  >
+                </div>
+              </div>
+              <ul
+                class="p-5 flex flex-col gap-3 text-[14px] md:text-[14.5px] leading-relaxed"
+              >
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Developed a full-stack contact management web application
+                    using Node.js, Express.js, MongoDB (Mongoose), and EJS
+                    server-rendered views.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Implemented secure session-based authentication with bcrypt
+                    password hashing, HTTP-only cookies, and per-user data
+                    isolation.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Built complete CRUD functionality for contact management,
+                    including profile picture uploads and automatic Cloudinary
+                    image cleanup on updates and deletions.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Added advanced search, favorite filtering, sorting, and
+                    pagination for efficient contact organization and
+                    browsing.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Designed a responsive dashboard displaying total contacts,
+                    favorites, and recently added contacts using Bootstrap
+                    5.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Applied security best practices including Helmet, CSRF
+                    protection, XSS-safe output encoding, and centralized error
+                    handling.</span
+                  >
+                </li>
+              </ul>
+            </article>
+
+            <!-- KAAMSETU -->
+            <article
+              id="kaamsetu"
+              class="rounded-lg border overflow-hidden scroll-mt-14"
+              style="background: var(--panel); border-color: var(--border)"
+            >
+              <div
+                class="px-5 pt-5 pb-4 border-b"
+                style="border-color: var(--border)"
+              >
+                <p
+                  class="mono text-[12px] text-[var(--muted)] flex items-center gap-2 mb-1.5"
+                >
+                  <i class="fa-brands fa-js" style="color: var(--gold)"></i
+                  >kaamsetu.js
+                </p>
+                <h3 class="font-semibold text-lg md:text-xl">
+                  KAAMSETU
+                  <span
+                    class="font-normal text-[var(--muted)] text-sm md:text-base"
+                    >— Secure Hiring Platform</span
+                  >
+                </h3>
+                <a
+                  href="https://github.com/PrasanPoudel/MERN_JOB_PORTAL"
+                  target="_blank"
+                  rel="noopener"
+                  class="mono text-[12.5px] mt-3 inline-flex items-center gap-2 px-3 py-2 rounded border hover:border-[var(--mint)] hover:text-[var(--mint)] transition-colors max-w-full"
+                  style="border-color: var(--border); color: var(--muted)"
+                >
+                  <i class="fa-brands fa-github shrink-0"></i
+                  ><span class="break-all"
+                    >github.com/PrasanPoudel/MERNJOBPORTAL</span
+                  >
+                </a>
+                <div class="flex flex-wrap gap-2 mt-4">
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >MongoDB</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >Express.js</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >React.js</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(110, 231, 183, 0.1);
+                      color: var(--mint);
+                    "
+                    >Node.js</span
+                  >
+                  <span
+                    class="mono text-[11px] px-2 py-1 rounded"
+                    style="
+                      background: rgba(240, 184, 96, 0.12);
+                      color: var(--gold);
+                    "
+                    >Random Forest ML</span
+                  >
+                </div>
+              </div>
+              <ul
+                class="p-5 flex flex-col gap-3 text-[14px] md:text-[14.5px] leading-relaxed"
+              >
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Developed a secure recruitment platform using the MERN
+                    stack for job seekers and employers.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Integrated a Random Forest machine learning model to detect
+                    fraudulent job postings and reduce recruitment scams.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Implemented automated candidate ranking based on
+                    profile-job relevance matching (TF-IDF + Cosine
+                    Similarity).</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Built secure authentication, profile management, resume
+                    management, and role-based authorization.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Integrated eSewa payment gateway for premium platform
+                    features.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Developed real-time communication functionality between job
+                    seekers, employers, and administrators.</span
+                  >
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fa-solid fa-chevron-right text-[10px] mt-[5px] shrink-0"
+                    style="color: var(--mint)"
+                  ></i
+                  ><span class="text-[var(--text)]/90"
+                    >Implemented administrative moderation tools for user and
+                    job management.</span
+                  >
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- education.md -->
+        <section
+          id="education"
+          class="px-5 md:px-10 py-10 border-b scroll-mt-11"
+          style="border-color: var(--border)"
+        >
+          <p class="mono text-[13px] mb-4">
+            <span class="comment"># education.md</span>
+          </p>
+          <div
+            class="pl-4 md:pl-5 border-l-2 flex items-start gap-4"
+            style="border-color: var(--panel-2)"
+          >
+            <i
+              class="fa-solid fa-graduation-cap text-xl mt-1"
+              style="color: var(--gold)"
+            ></i>
+            <div>
+              <h3 class="font-semibold text-[15px] md:text-base">
+                Bachelor of Science in Computer Science and Information
+                Technology (BSc CSIT)
+              </h3>
+              <p class="text-[var(--muted)] text-sm mt-1">
+                Butwal Multiple Campus, Tribhuvan University
+              </p>
+              <p class="mono text-[13px] mt-1" style="color: var(--mint)">
+                2023 — Present
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- experience.log -->
+        <section id="experience" class="px-5 md:px-10 py-10 scroll-mt-11">
+          <p class="mono text-[13px] text-[var(--muted)] mb-4">
+            experience.log
+          </p>
+          <div
+            class="rounded-lg border p-4"
+            style="background: var(--panel); border-color: var(--border)"
+          >
+            <p class="mono text-[13px] text-[var(--muted)]">
+              <span style="color: var(--mint)"
+                >prasanpoudel\portfolio><br /></span
+              ><span style="color: var(--lilac)">~</span>$ cat experience.log
+            </p>
+            <p class="mono text-[13px] mt-2">
+              Still haven't worked professionally in any company yet<span
+                class="cursor-blink"
+              ></span>
+            </p>
+          </div>
+        </section>
+
+        <!-- Contact / footer -->
+        <footer
+          class="px-5 md:px-10 py-10 border-t"
+          style="border-color: var(--border)"
+        >
+          <div
+            class="rounded-lg border p-5 md:p-6"
+            style="background: var(--panel); border-color: var(--border)"
+          >
+            <p class="mono text-[13px]">
+              <span style="color: var(--mint)"
+                >prasanpoudel\portfolio><br /></span
+              ><span style="color: var(--lilac)">~</span>$ contact --reach-out
+            </p>
+            <div class="mt-4 grid sm:grid-cols-2 gap-3 mono text-[13px]">
+              <button
+                id="copyEmail"
+                class="copy-btn text-left flex items-center justify-between gap-2 px-3 py-2.5 rounded border hover:border-[var(--mint)] transition-colors"
+                style="border-color: var(--border)"
+              >
+                <span class="flex items-center gap-2 text-[var(--text)]"
+                  ><i
+                    class="fa-solid fa-envelope"
+                    style="color: var(--mint)"
+                  ></i
+                  >prasanpoudel501@gmail.com</span
+                >
+                <i class="fa-regular fa-copy text-[var(--muted)]"></i>
+              </button>
+              <a
+                href="tel:+9779841098772"
+                class="flex items-center gap-2 px-3 py-2.5 rounded border hover:border-[var(--mint)] transition-colors"
+                style="border-color: var(--border)"
+                ><i class="fa-solid fa-phone" style="color: var(--mint)"></i
+                >+977 9841098772</a
+              >
+              <a
+                href="https://github.com/PrasanPoudel"
+                target="_blank"
+                rel="noopener"
+                class="flex items-center gap-2 px-3 py-2.5 rounded border hover:border-[var(--mint)] transition-colors"
+                style="border-color: var(--border)"
+                ><i class="fa-brands fa-github" style="color: var(--mint)"></i
+                >github.com/PrasanPoudel</a
+              >
+              <a
+                href="https://prasanpoudel.com.np"
+                target="_blank"
+                rel="noopener"
+                class="flex items-center gap-2 px-3 py-2.5 rounded border hover:border-[var(--mint)] transition-colors"
+                style="border-color: var(--border)"
+                ><i class="fa-solid fa-globe" style="color: var(--mint)"></i
+                >prasanpoudel.com.np</a
+              >
+            </div>
+          </div>
+          <p class="mono text-[12px] text-[var(--muted)] mt-6 text-center">
+            © 2026 Prasan Poudel · Milanchowk, Butwal-9, Nepal
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      // Mobile sidebar toggle
+      const sidebar = document.getElementById("sidebar");
+      const scrim = document.getElementById("scrim");
+      const menuToggle = document.getElementById("menuToggle");
+      function closeSidebar() {
+        sidebar.classList.remove("open");
+        scrim.classList.remove("open");
+      }
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        scrim.classList.toggle("open");
+      });
+      scrim.addEventListener("click", closeSidebar);
+      document
+        .querySelectorAll("#sidebar a")
+        .forEach((a) => a.addEventListener("click", closeSidebar));
+
+      const sections = [
+        "about",
+        "skills",
+        "projects",
+        "education",
+        "experience",
+      ].map((id) => document.getElementById(id));
+      const tabLinks = document.querySelectorAll(".tab-link");
+      const treeLinks = document.querySelectorAll(".tree-link[data-tab]");
+      const setActive = (id) => {
+        tabLinks.forEach((l) =>
+          l.classList.toggle("active", l.dataset.tab === id),
+        );
+        treeLinks.forEach((l) =>
+          l.classList.toggle("active", l.dataset.tab === id),
+        );
+        const activeTab = document.querySelector(".tab-link.active");
+        if (activeTab)
+          activeTab.scrollIntoView({
+            behavior: "smooth",
+            inline: "center",
+            block: "nearest",
+          });
+      };
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) setActive(e.target.id);
+          });
+        },
+        { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+      );
+      sections.forEach((s) => s && io.observe(s));
+
+      // Copy email
+      const copyBtn = document.getElementById("copyEmail");
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText("prasanpoudel501@gmail.com");
+          const icon = copyBtn.querySelector(".fa-copy");
+          icon.classList.remove("fa-copy");
+          icon.classList.add("fa-check");
+          icon.style.color = "var(--mint)";
+          setTimeout(() => {
+            icon.classList.remove("fa-check");
+            icon.classList.add("fa-copy");
+            icon.style.color = "";
+          }, 1500);
+        } catch (e) {
+          /* clipboard unavailable — no-op */
+        }
+      });
+    </script>
   </body>
 </html>
