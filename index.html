@@ -27,6 +27,31 @@
         --lilac: #b4a7f5;
         --rose: #f28b82;
       }
+
+      [data-theme="light"] {
+        --bg: #f5f7fa;
+        --panel: #ffffff;
+        --panel-2: #eaeef3;
+        --border: #d4dae3;
+        --text: #1f2733;
+        --muted: #5b6678;
+        --mint: #0f9d72;
+        --gold: #b07912;
+        --lilac: #6c5ce7;
+        --rose: #d9534f;
+      }
+      [data-theme="light"] ::selection {
+        background: var(--mint);
+        color: #ffffff;
+      }
+      [data-theme="light"] .tab-link:hover,
+      [data-theme="light"] .tree-link:hover {
+        background: rgba(0, 0, 0, 0.04);
+      }
+      [data-theme="light"] .tab-link.active,
+      [data-theme="light"] .tree-link.active {
+        background: rgba(15, 157, 114, 0.08);
+      }
       * {
         box-sizing: border-box;
       }
@@ -213,6 +238,20 @@
         transform: scale(0.94);
       }
     </style>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var prefersLight =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: light)").matches;
+          var theme = saved || (prefersLight ? "light" : "dark");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
   </head>
   <body class="min-h-screen">
     <!-- Title bar -->
@@ -232,7 +271,7 @@
         <span class="traffic-dot" style="background: var(--gold)"></span>
         <span class="traffic-dot" style="background: var(--mint)"></span>
       </div>
-      <nav class="mono text-[13px] flex overflow-x-auto no-scrollbar">
+          <nav class="mono text-[13px] flex overflow-x-auto no-scrollbar">
         <a
           href="#about"
           class="tab-link px-3 h-11 flex items-center gap-2 shrink-0"
@@ -264,6 +303,14 @@
           ><i class="fa-solid fa-terminal text-[11px]"></i>experience.log</a
         >
       </nav>
+      <button
+        id="themeToggle"
+        class="ml-auto shrink-0 text-[var(--muted)] hover:text-[var(--text)] px-2"
+        aria-label="Toggle light and dark mode"
+        title="Toggle theme"
+      >
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+      </button>
     </header>
 
     <div id="scrim"></div>
@@ -1081,6 +1128,33 @@
     </div>
 
     <script>
+      // Theme toggle
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute("data-theme", theme);
+        const isLight = theme === "light";
+        themeIcon.classList.toggle("fa-moon", isLight);
+        themeIcon.classList.toggle("fa-sun", !isLight);
+        themeToggle.setAttribute(
+          "aria-label",
+          isLight ? "Switch to dark mode" : "Switch to light mode",
+        );
+      };
+      applyTheme(document.documentElement.getAttribute("data-theme") || "dark");
+      themeToggle.addEventListener("click", () => {
+        const next =
+          document.documentElement.getAttribute("data-theme") === "light"
+            ? "dark"
+            : "light";
+        applyTheme(next);
+        try {
+          localStorage.setItem("theme", next);
+        } catch (e) {
+          /* no operation */
+        }
+      });
+
       // Mobile sidebar toggle
       const sidebar = document.getElementById("sidebar");
       const scrim = document.getElementById("scrim");
